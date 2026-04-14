@@ -55,7 +55,21 @@ Desenvolvemos um script em Python que monitora o clima local. Caso a API detecte
 - **Simulador Wokwi:** [https://wokwi.com/projects/461289392904235009]
 - **Repositório GitHub:** [https://github.com/TenorioDevfullStack/meugit-cursotiaor-pbl-fase3-pastas.git]
 
-## Imagens do Projeto
+## 📸 Imagens do Projeto
+
+### Circuito de Sensores no Wokwi
+
+#### DHT22 - Sensor de Umidade e Temperatura
+![DHT22](prints-circuito-esp32/DHT22.png)
+
+#### LDR - Sensor de pH (Luz)
+![LDR](prints-circuito-esp32/LDR.png)
+
+#### Relé - Controle da Bomba de Irrigação
+![Relé](prints-circuito-esp32/Relé.png)
+
+#### Botões - Sensores de Nutrientes (NPK)
+![Botões](prints-circuito-esp32/botoes.png)
 
 ## 👥 Integrantes
 
