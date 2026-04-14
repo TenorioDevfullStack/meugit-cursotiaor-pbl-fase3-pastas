@@ -51,9 +51,9 @@ Desenvolvemos um script em Python que monitora o clima local. Caso a API detecte
 
 ## 🔗 Links do Projeto
 
-- **Vídeo de Demonstração:** [INSIRA O SEU LINK DO YOUTUBE/DRIVE AQUI]
+- **Vídeo de Demonstração:** [https://youtu.be/6xBzlTtb9VE]
 - **Simulador Wokwi:** [https://wokwi.com/projects/461289392904235009]
-- **Repositório GitHub:** [Link deste repositório]
+- **Repositório GitHub:** [https://github.com/TenorioDevfullStack/meugit-cursotiaor-pbl-fase3-pastas.git]
 
 ## Imagens do Projeto
 
