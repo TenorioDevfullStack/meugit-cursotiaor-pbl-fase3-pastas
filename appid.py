@@ -1,15 +1,51 @@
+import os
 import requests
 import time
+from pathlib import Path
 
 # --- CONFIGURAÇÕES ---
-API_KEY = "6bbe01d6e68c62d80afc9638b575e68d"  # Coloque sua chave da OpenWeatherMap
-CIDADE = "Sao Paulo"
-URL = f"http://api.openweathermap.org/data/2.5/weather?q={CIDADE}&appid={API_KEY}&units=metric&lang=pt_br"
+CIDADE = os.environ.get("OPENWEATHER_CITY", "Sao Paulo")
+ARQUIVO_ENV = Path(".env")
+
+
+def limpar_valor_env(valor):
+    return valor.strip().strip('"').strip("'")
+
+
+def carregar_env_local(caminho=ARQUIVO_ENV):
+    if not caminho.exists():
+        return
+
+    for linha in caminho.read_text(encoding="utf-8").splitlines():
+        linha = linha.strip()
+        if not linha or linha.startswith("#") or "=" not in linha:
+            continue
+
+        nome, valor = linha.split("=", 1)
+        nome = nome.strip()
+        if nome and nome not in os.environ:
+            os.environ[nome] = limpar_valor_env(valor)
+
+
+def obter_api_key():
+    carregar_env_local()
+    return os.environ.get("OPENWEATHER_API_KEY", "").strip()
+
 
 def consultar_clima():
+    api_key = obter_api_key()
+    if not api_key:
+        print("Configure OPENWEATHER_API_KEY no ambiente ou no arquivo .env.")
+        return
+
+    url = (
+        "http://api.openweathermap.org/data/2.5/weather"
+        f"?q={CIDADE}&appid={api_key}&units=metric&lang=pt_br"
+    )
+
     print(f"\nConsultando clima para: {CIDADE}...")
     try:
-        resposta = requests.get(URL)
+        resposta = requests.get(url, timeout=10)
         dados = resposta.json()
 
         if resposta.status_code == 200:

@@ -1,0 +1,21 @@
+.pio/
+__pycache__/
+*.pyc
+
+# Arquivos locais com credenciais e segredos
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Arquivos grandes gerados para apresentacao
+video/*.mp4
+
+serial_wokwi.log
+dados_sensores.csv
+dados_sensores_teste.csv
+serial_wokwi_teste.txt

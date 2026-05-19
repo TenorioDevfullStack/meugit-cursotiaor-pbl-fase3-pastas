@@ -30,6 +30,7 @@ void setup() {
   
   Serial.println("--- FarmTech Solutions: Sistema C++ Iniciado ---");
   Serial.println("Comandos Serial: 'C' para Chuva, 'S' para Sol");
+  Serial.println("CSV_HEADER,timestamp_ms,umidade,ph,n_ok,p_ok,k_ok,chuva_prevista,bomba");
 }
 
 void loop() {
@@ -66,9 +67,11 @@ void loop() {
   if ((soloSeco || phRuim || faltaNutriente) && !chuvaPrevista) {
     digitalWrite(RELE_PIN, HIGH);
     imprimirStatus(umid, ph, n_ok, p_ok, k_ok, "LIGADA");
+    imprimirCsv(umid, ph, n_ok, p_ok, k_ok, "LIGADA");
   } else {
     digitalWrite(RELE_PIN, LOW);
     imprimirStatus(umid, ph, n_ok, p_ok, k_ok, "DESLIGADA");
+    imprimirCsv(umid, ph, n_ok, p_ok, k_ok, "DESLIGADA");
   }
 
   delay(2000); // Aguarda 2 segundos para próxima leitura
@@ -81,4 +84,17 @@ void imprimirStatus(float u, float p, bool n, bool phos, bool k, String st) {
   Serial.print("NPK: "); Serial.print(n); Serial.print(phos); Serial.print(k);
   Serial.print(" | Chuva: "); Serial.print(chuvaPrevista ? "SIM" : "NAO");
   Serial.print(" | BOMBA: "); Serial.println(st);
+}
+
+// Linha estruturada para o script Python gravar em CSV
+void imprimirCsv(float u, float p, bool n, bool phos, bool k, String st) {
+  Serial.print("CSV,");
+  Serial.print(millis()); Serial.print(",");
+  Serial.print(u); Serial.print(",");
+  Serial.print(p, 1); Serial.print(",");
+  Serial.print(n ? 1 : 0); Serial.print(",");
+  Serial.print(phos ? 1 : 0); Serial.print(",");
+  Serial.print(k ? 1 : 0); Serial.print(",");
+  Serial.print(chuvaPrevista ? 1 : 0); Serial.print(",");
+  Serial.println(st);
 }
